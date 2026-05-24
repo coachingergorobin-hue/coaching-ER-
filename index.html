@@ -701,13 +701,15 @@ function toggle(el){
 document.getElementById('cform').addEventListener('submit', async function(e){
   e.preventDefault();
 
-  // Vérification radios obligatoires
-  const required_radios = ['pb', 'salle'];
+  // Vérification champs texte obligatoires
   let ok = true;
-  required_radios.forEach(n => {
-    if(!document.querySelector('input[name="'+n+'"]:checked')) ok = false;
+  const required_fields = ['nom', 'prenom', 'email', 'whatsapp', 'age', 'discipline', 'douleurs', 'objectifs', 'frequence', 'frein'];
+  required_fields.forEach(id => {
+    const field = document.getElementById(id);
+    if(field && !field.value.trim()) ok = false;
   });
-  if(!ok){ alert('Merci de répondre à toutes les questions obligatoires.'); return; }
+
+  if(!ok){ alert('Merci de remplir tous les champs obligatoires.'); return; }
 
   // Bouton en état loading
   const btn = this.querySelector('.btn-submit');
